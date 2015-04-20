@@ -278,26 +278,25 @@
 <span class='comment'>// TODO: Figure out how to ommit gets when not supported by opt</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>sockopt_impl</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>:<span class='ident'>path</span>, <span class='ident'>bool</span>) <span class='op'>=&gt;</span> {
-        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='ident'>bool</span>, <span class='ident'>GetBool</span>, <span class='ident'>bool</span>, <span class='ident'>SetBool</span>);
+        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='ident'>bool</span>, <span class='ident'>GetBool</span>, <span class='ident'>SetBool</span>);
     };
 
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>:<span class='ident'>path</span>, <span class='ident'>u8</span>) <span class='op'>=&gt;</span> {
-        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='ident'>u8</span>, <span class='ident'>GetU8</span>, <span class='ident'>u8</span>, <span class='ident'>SetU8</span>);
+        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='ident'>u8</span>, <span class='ident'>GetU8</span>, <span class='ident'>SetU8</span>);
     };
 
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>:<span class='ident'>path</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
-        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>, <span class='ident'>GetStruct</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span><span class='op'>&gt;</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>, <span class='ident'>SetStruct</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span><span class='op'>&gt;</span>);
+        <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>, <span class='ident'>GetStruct</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span><span class='op'>&gt;</span>, <span class='ident'>SetStruct</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span><span class='op'>&gt;</span>);
     };
 
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>:<span class='ident'>path</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>get_ty</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>getter</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>set_ty</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>setter</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>flag</span>:<span class='ident'>path</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>getter</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>setter</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>;
 
-        <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>SockOpt</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span> {
-            <span class='kw'>type</span> <span class='ident'>Get</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>get_ty</span>;
-            <span class='kw'>type</span> <span class='ident'>Set</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>set_ty</span>;
+        <span class='kw'>impl</span> <span class='ident'>SockOpt</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span> {
+            <span class='kw'>type</span> <span class='ident'>Val</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>;
 
-            <span class='kw'>fn</span> <span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fd</span>: <span class='ident'>Fd</span>, <span class='ident'>level</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>get_ty</span><span class='op'>&gt;</span> {
+            <span class='kw'>fn</span> <span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fd</span>: <span class='ident'>Fd</span>, <span class='ident'>level</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span><span class='op'>&gt;</span> {
                 <span class='kw'>unsafe</span> {
                     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>getter</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>getter</span> <span class='op'>=</span> <span class='ident'>Get</span>::<span class='ident'>blank</span>();
 
@@ -314,7 +313,7 @@
                 }
             }
 
-            <span class='kw'>fn</span> <span class='ident'>set</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fd</span>: <span class='ident'>Fd</span>, <span class='ident'>level</span>: <span class='ident'>c_int</span>, <span class='ident'>val</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>set_ty</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+            <span class='kw'>fn</span> <span class='ident'>set</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>fd</span>: <span class='ident'>Fd</span>, <span class='ident'>level</span>: <span class='ident'>c_int</span>, <span class='ident'>val</span>: <span class='kw-2'>&amp;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ty</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
                 <span class='kw'>unsafe</span> {
                     <span class='kw'>let</span> <span class='ident'>setter</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>setter</span> <span class='op'>=</span> <span class='ident'>Set</span>::<span class='ident'>new</span>(<span class='ident'>val</span>);
 
@@ -346,6 +345,7 @@
 <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='ident'>ReceiveTimeout</span>, <span class='ident'>consts</span>::<span class='ident'>SO_RCVTIMEO</span>, <span class='ident'>TimeVal</span>);
 <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='ident'>SendTimeout</span>, <span class='ident'>consts</span>::<span class='ident'>SO_SNDTIMEO</span>, <span class='ident'>TimeVal</span>);
 <span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='ident'>Broadcast</span>, <span class='ident'>consts</span>::<span class='ident'>SO_BROADCAST</span>, <span class='ident'>bool</span>);
+<span class='macro'>sockopt_impl</span><span class='macro'>!</span>(<span class='ident'>OobInline</span>, <span class='ident'>consts</span>::<span class='ident'>SO_OOBINLINE</span>, <span class='ident'>bool</span>);
 
 <span class='comment'>/*
  *
@@ -360,8 +360,8 @@
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>unwrap</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span>;
 }
 
-<span class='kw'>trait</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span>;
+<span class='kw'>trait</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span>;
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>;
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_len</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>socklen_t</span>;
 }
@@ -394,7 +394,7 @@
     <span class='ident'>ptr</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>T</span>,
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetStruct</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetStruct</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>ptr</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>SetStruct</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span><span class='op'>&gt;</span> {
         <span class='ident'>SetStruct</span> { <span class='ident'>ptr</span>: <span class='ident'>ptr</span> }
     }
@@ -436,9 +436,9 @@
     <span class='ident'>val</span>: <span class='ident'>c_int</span>,
 }
 
-<span class='kw'>impl</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='ident'>bool</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetBool</span> {
-    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>SetBool</span> {
-        <span class='ident'>SetBool</span> { <span class='ident'>val</span>: <span class='kw'>if</span> <span class='ident'>val</span> { <span class='number'>1</span> } <span class='kw'>else</span> { <span class='number'>0</span> } }
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>bool</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetBool</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>SetBool</span> {
+        <span class='ident'>SetBool</span> { <span class='ident'>val</span>: <span class='kw'>if</span> <span class='op'>*</span><span class='ident'>val</span> { <span class='number'>1</span> } <span class='kw'>else</span> { <span class='number'>0</span> } }
     }
 
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span> {
@@ -478,9 +478,9 @@
     <span class='ident'>val</span>: <span class='ident'>uint8_t</span>,
 }
 
-<span class='kw'>impl</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetU8</span> {
-    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>SetU8</span> {
-        <span class='ident'>SetU8</span> { <span class='ident'>val</span>: <span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>uint8_t</span> }
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Set</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>u8</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>SetU8</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>val</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>SetU8</span> {
+        <span class='ident'>SetU8</span> { <span class='ident'>val</span>: <span class='op'>*</span><span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>uint8_t</span> }
     }
 
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span> {

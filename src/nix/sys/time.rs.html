@@ -272,7 +272,6 @@
 <span id="230">230</span>
 <span id="231">231</span>
 <span id="232">232</span>
-<span id="233">233</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>fmt</span>, <span class='ident'>ops</span>};
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>time_t</span>, <span class='ident'>suseconds_t</span>};
@@ -334,7 +333,6 @@
 
     <span class='doccomment'>/// Makes a new `TimeVal` with given number of microseconds.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='attribute'>#[<span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std_misc&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>microseconds</span>(<span class='ident'>microseconds</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='ident'>TimeVal</span> {
         <span class='kw'>let</span> (<span class='ident'>secs</span>, <span class='ident'>micros</span>) <span class='op'>=</span> <span class='ident'>div_mod_floor_64</span>(<span class='ident'>microseconds</span>, <span class='ident'>MICROS_PER_SEC</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>secs</span> <span class='op'>&gt;=</span> <span class='ident'>MIN_SECONDS</span> <span class='op'>&amp;&amp;</span> <span class='ident'>secs</span> <span class='op'>&lt;=</span> <span class='ident'>MAX_SECONDS</span>, <span class='string'>&quot;TimeVal out of bounds&quot;</span>);
