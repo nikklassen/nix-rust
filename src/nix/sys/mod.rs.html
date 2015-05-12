@@ -81,14 +81,14 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;android&quot;</span>))]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>epoll</span>;
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>))]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>event</span>;
 
 <span class='comment'>// TODO: switch from feature flags to conditional builds</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;eventfd&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>eventfd</span>;
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>)))]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>ioctl</span>;
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>signal</span>;
@@ -146,6 +146,10 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

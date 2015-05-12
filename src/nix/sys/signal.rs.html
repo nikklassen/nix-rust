@@ -414,6 +414,7 @@
 <span id="372">372</span>
 <span id="373">373</span>
 <span id="374">374</span>
+<span id="375">375</span>
 </pre><pre class='rust '>
 <span class='comment'>// Portions of this file are Copyright 2014 The Rust Project Developers.</span>
 <span class='comment'>// See http://rust-lang.org/COPYRIGHT.</span>
@@ -659,6 +660,7 @@
     <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>sigset_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;dragonfly&quot;</span>))]</span>
     <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>sigset_t</span> {
         <span class='ident'>bits</span>: [<span class='ident'>u32</span>; <span class='number'>4</span>],
     }
@@ -822,6 +824,10 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

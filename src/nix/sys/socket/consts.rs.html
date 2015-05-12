@@ -219,6 +219,7 @@
 <span id="177">177</span>
 <span id="178">178</span>
 <span id="179">179</span>
+<span id="180">180</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='self'>self</span>, <span class='ident'>c_int</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>os</span>::<span class='op'>*</span>;
@@ -312,7 +313,8 @@
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>MSG_DONTWAIT</span>: <span class='ident'>SockMessageFlags</span> <span class='op'>=</span> <span class='number'>0x40</span>;
 }
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
+<span class='comment'>// Not all of these constants exist on freebsd</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
 <span class='kw'>mod</span> <span class='ident'>os</span> {
     <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>uint8_t</span>};
 
@@ -432,6 +434,10 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
