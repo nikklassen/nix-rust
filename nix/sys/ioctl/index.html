@@ -45,8 +45,84 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-11611' class='srclink' href='../../../src/nix/sys/ioctl.rs.html#1-221' title='goto source code'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+        </span><a id='src-11611' class='srclink' href='../../../src/nix/sys/ioctl.rs.html#1-223' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Provide helpers for making ioctl system calls</p>
+
+<h1 id="overview-of-ioctls" class='section-header'><a
+                           href="#overview-of-ioctls">Overview of IOCTLs</a></h1>
+<p>The <code>ioctl</code> system call is a widely support system
+call on *nix systems providing access to functions
+and data that do not fit nicely into the standard
+read and write operations on a file itself.  It is
+common to see ioctls used for the following purposes:</p>
+
+<ul>
+<li>Provide read/write access to out-of-band data related
+to a device such as configuration (for instance, setting
+serial port options)</li>
+<li>Provide a mechanism for performing full-duplex data
+transfers (for instance, xfer on SPI devices).</li>
+<li>Provide access to control functions on a device (for example,
+on Linux you can send commands like pause, resume, and eject
+to the CDROM device.</li>
+<li>Do whatever else the device driver creator thought made most sense.</li>
+</ul>
+
+<p>Ioctls are synchronous system calls and are similar to read and
+write calls in that regard.</p>
+
+<p>The prototype for the ioctl system call in libc is as follows:</p>
+
+<pre><code class="language-c">int ioctl(int fd, unsigned long request, ...);
+</code></pre>
+
+<p>Typically, an ioctl takes 3 parameters as arguments:</p>
+
+<ol>
+<li>An open file descriptor, <code>fd</code>.</li>
+<li>An device-dependennt request code or operation.  This request
+code is referred to as <code>op</code> in this module.</li>
+<li>Either a pointer to a location in memory or an integer.  This
+number of pointer may either be used by the kernel or written
+to by the kernel depending on how the operation is documented
+to work.</li>
+</ol>
+
+<p>The <code>op</code> request code is essentially an arbitrary integer having
+a device-driver specific meaning.  Over time, it proved difficult
+for various driver implementors to use this field sanely, so a
+convention with macros was introduced to the Linux Kernel that
+is used by most newer drivers.  See
+<a href="https://github.com/torvalds/linux/blob/master/Documentation/ioctl/ioctl-number.txt">https://github.com/torvalds/linux/blob/master/Documentation/ioctl/ioctl-number.txt</a>
+for additional details.  The macros exposed by the kernel for
+consumers are implemented in this module and may be used to
+instead of calls like <code>_IOC</code>, <code>_IO</code>, <code>_IOR</code>, and <code>_IOW</code>.</p>
+
+<h1 id="interface-overview" class='section-header'><a
+                           href="#interface-overview">Interface Overview</a></h1>
+<p>This ioctl module seeks to tame the ioctl beast by providing
+a set of safer (although not safe) functions
+implementing the most common ioctl access patterns.</p>
+
+<p>The most common access patterns for ioctls are as follows:</p>
+
+<ol>
+<li><code>read</code>: A pointer is provided to the kernel which is populated
+with a value containing the &quot;result&quot; of the operation.  The
+result may be an integer or structure.  The kernel may also
+read values from the provided pointer (usually a structure).</li>
+<li><code>write</code>: A pointer is provided to the kernel containing values
+that the kernel will read in order to perform the operation.</li>
+<li><code>execute</code>: The operation is passed to the kernel but no
+additional pointer is passed.  The operation is enough
+and it either succeeds or results in an error.</li>
+</ol>
+
+<p>Where appropriate, versions of these interface function are provided
+taking either refernces or pointers.  The pointer versions are
+necessary for cases (notably slices) where a reference cannot
+be generically cast to a pointer.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.IoctlDirFlags.html'
